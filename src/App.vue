@@ -1,6 +1,4 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
 import HelloTest from './components/HelloTest.vue'
 import Block from './components/Block.vue';
 </script>
@@ -14,7 +12,8 @@ export default {
       openModal:false,
       name:"Humna",
       isPlaying:false,
-      delay:null
+      delay:null,
+      score:null
     }
   },
   methods:{
@@ -35,6 +34,12 @@ export default {
       this.isPlaying=true
       console.log(this.delay,' delayyyyyyy')
 
+    },
+    endGame(reactionTimer){
+      this.score=reactionTimer
+      this.isPlaying=false
+
+
     }
   }
 }
@@ -53,7 +58,8 @@ export default {
 <div class="game">
   <h5>Reaction Timer Game</h5>
   <button class="btn btn-dark" @click="play" :disabled="isPlaying" >Play</button>
-  <Block v-if="isPlaying" :delay="delay"  />
+  <Block v-if="isPlaying" :delay="delay"  @end="endGame"/>
+  <p>Score is {{score}} : ms  </p>
 
 
 </div>
